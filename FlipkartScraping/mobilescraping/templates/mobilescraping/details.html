@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static  %}
+<head>
+    <meta charset="UTF-8">
+    <title>WELCOME</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+            {% if messages %}
+                {% for message in messages %}
+                    alert(message);
+                {% endfor %}
+            {% endif %}
+        </script>
+</head>
+<style type="text/css">
+
+
+	body{
+		background-color: orange;
+	}
+	table {
+        counter-reset: tableCount;
+    }
+</style>
+<body>
+    <div class="jumbotron" style="background-color:  #1a75ff;height: 30px;" id="hed">
+		  <center><h1 style="color:white;" class="glyphicon glyphicon-shopping-cart"> Scraping Area</h1></center>
+          </div>
+
+
+		<div class="container">
+
+		<div class="scrap">
+
+			<form action="{% url 'home' %}" method="POST">
+	    	{% csrf_token %}
+
+	        <h3>Please Enter in below field</h3><br>
+	         <input type="text" name="url" style="width: 1000;height: 40" placeholder="text"><br>
+
+
+
+		<button class="btn btn-success">Submit</button>&ensp;
+
+	    	</form>
+
+		</div>
+
+
+        <table 	width="200" class="table table-bordered table-hover table-striped">
+			<tr class="info">
+				<th>No:</th>
+				<th>Product name</th>
+				<th>Price</th>
+				<th>Link</th>
+			</tr>
+			<tr>
+				{% for itm in mylist %}
+				<td class="counterCell"></td>
+				<td style="width:100px">
+				{{itm.0}}
+
+				</td>
+				<td>
+					{{itm.1}}
+				</td>
+				<td>
+					<p>{{itm.2}} &#9733;</p>
+				</td>
+				<td>
+					<a href={{itm.3}} target="_blank">click here</a>
+				</td>
+
+			</tr>
+			{% endfor %}
+
+		</table>
+        </div>
+</body>
+</html>
